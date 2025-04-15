@@ -1,0 +1,45 @@
+﻿@model QuanLyTiemNET.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <h2 class="text-center mt-4">@ViewData["Title"]</h2>
+        <hr />
+        <section>
+            <form asp-action="Login" method="post">
+                @* Hiển thị lỗi tổng hợp (nếu có, ví dụ: sai tài khoản/mật khẩu) *@
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Username" class="form-label"></label>
+                    <input asp-for="Username" class="form-control" autocomplete="username" aria-required="true" placeholder="Nhập tên đăng nhập" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Nhập mật khẩu" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Đăng nhập</button>
+                </div>
+
+                <div class="mt-3 text-center">
+                    <p>
+                        <a asp-action="Register" asp-route-returnUrl="@ViewData["ReturnUrl"]">Đăng ký tài khoản mới</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

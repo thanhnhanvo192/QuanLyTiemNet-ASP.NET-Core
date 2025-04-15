@@ -1,0 +1,31 @@
+# Build results
+bin/
+obj/
+
+# VS user-specific files
+.vs/
+*.user
+*.suo
+
+# Rider & VS Code
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# ASP.NET publish folders (nếu bạn dùng frontend tools như Webpack/Gulp)
+wwwroot/dist/
+wwwroot/build/
+
+# Node.js (nếu có)
+node_modules/
+
+# Database files (nếu có)
+*.db
+*.sqlite
+*.db-journal

@@ -1,0 +1,31 @@
+﻿@model QuanLyTiemNET.Models.User
+
+@{
+    ViewData["Title"] = "Chi tiết người dùng";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Tên đăng nhập</dt>
+        <dd class="col-sm-10">@Model.Username</dd>
+
+        <dt class="col-sm-2">Họ tên</dt>
+        <dd class="col-sm-10">@Model.FullName</dd>
+
+        <dt class="col-sm-2">Số điện thoại</dt>
+        <dd class="col-sm-10">@Model.PhoneNumber</dd>
+
+        <dt class="col-sm-2">Số dư</dt>
+        <dd class="col-sm-10">@Model.AccountBalance.ToString("N0")</dd>
+
+        <dt class="col-sm-2">Vai trò</dt>
+        <dd class="col-sm-10">@Model.Role</dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id" class="btn btn-warning">Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div>
