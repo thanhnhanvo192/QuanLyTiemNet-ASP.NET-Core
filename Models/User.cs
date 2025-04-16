@@ -25,7 +25,7 @@ namespace QuanLyTiemNET.Models
         [Range(0, double.MaxValue)]
         public decimal AccountBalance { get; set; }
         [Required]
-        public string Role { get; set; } // "Admin" hoặc "User"
+        public string Role { get; set; } = "User";
         public int Status { get; set; } = 1;
     }
 }

@@ -22,9 +22,7 @@
 
     <div>
         <label asp-for="Status" class="control-label"></label>
-        <select asp-for="Status" class="form-control" asp-items="@(new SelectList(new[] { "Có sẵn", "Đang sử dụng", "Bảo trì" }))">
-            <option value="">-- Trạng thái --</option>
-        </select>
+        <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<QuanLyTiemNET.Models.ComputerStatus>()"></select>
         <span asp-validation-for="Status" class="text-danger"></span>
     </div>
 

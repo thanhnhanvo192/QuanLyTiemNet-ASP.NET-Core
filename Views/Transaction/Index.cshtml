@@ -1,0 +1,34 @@
+﻿@model List<QuanLyTiemNET.Models.Transaction>
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-warning">
+        @TempData["Message"]
+    </div>
+}
+
+<h2>Danh sách giao dịch chưa thanh toán</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ComputerID</th>
+            <th>Số tiền</th>
+            <th>Thời gian</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ComputerID</td>
+                <td>@item.Amount.ToString("N0") VND</td>
+                <td>@item.TransactionTime.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <form asp-area="" asp-route-id="@item.Id" asp-controller="Transaction" asp-action="Payment" method="post" id="logoutForm" class="form-inline">
+                        <button type="submit" class="nav-link btn btn-link text-dark">Thanh toán</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

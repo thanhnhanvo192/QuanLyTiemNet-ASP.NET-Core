@@ -21,12 +21,12 @@
         <span asp-validation-for="HourlyRate" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Status"></label>
-        <select asp-for="Status" class="form-control" asp-items="@(new SelectList(new[] { "Có sẵn", "Đang sử dụng", "Bảo trì"}, Model.Status))">
-            <option value="">-- Trạng thái --</option>
-        </select>
-        <span asp-validation-for="Status" class="text-danger"></span>
+    <div class="form-group mb-3">
+        <label asp-for="Status" class="form-label"></label>
+            <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<ComputerStatus>()">
+                <option value="">-- Chọn trạng thái --</option> 
+            </select>
+            <span asp-validation-for="Status" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-danger">Lưu</button>

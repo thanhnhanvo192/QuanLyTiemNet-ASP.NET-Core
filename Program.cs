@@ -9,18 +9,13 @@ namespace QuanLyTiemNET
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme) // Đặt Cookie là scheme mặc định
-            .AddCookie(options => // Đăng ký handler xử lý Cookie
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
             {
-                // Các cấu hình quan trọng cho Cookie handler
-                options.LoginPath = "/Account/Login"; // Đường dẫn đến trang đăng nhập
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(60); // Thời gian hết hạn
+                options.LoginPath = "/Account/Login";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
                 options.SlidingExpiration = true;
-                // options.AccessDeniedPath = "/Account/AccessDenied"; // Tùy chọn
-                // options.LogoutPath = "/Account/Logout"; // Tùy chọn
-                // options.Cookie.Name = ".YourApp.AuthCookie"; // Tùy chọn đặt tên cookie
             });
 
             var connectionString =
@@ -32,11 +27,9 @@ namespace QuanLyTiemNET
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

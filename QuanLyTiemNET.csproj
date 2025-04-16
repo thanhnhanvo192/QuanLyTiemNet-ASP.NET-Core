@@ -14,4 +14,8 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\th.jpg" />
+  </ItemGroup>
+
 </Project>

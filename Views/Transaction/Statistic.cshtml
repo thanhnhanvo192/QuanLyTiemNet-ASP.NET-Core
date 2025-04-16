@@ -1,0 +1,21 @@
+﻿@model IEnumerable<QuanLyTiemNET.Models.StatisticViewModel>
+
+<h2>Thống kê</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ComputerID</th>
+            <th>Tổng tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ComputerID</td>
+                <td>@item.TotalAmount</td>
+            </tr>
+        }
+    </tbody>
+</table>

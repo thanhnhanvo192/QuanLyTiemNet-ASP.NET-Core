@@ -73,7 +73,6 @@ namespace QuanLyTiemNET.Controllers
                 {
                     var existingUser = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.id == id);
                     if (existingUser == null) return NotFound();
-                    // Giữ lại password cũ nếu không sửa trong form
                     user.Password = existingUser.Password;
                     _context.Users.Update(user);
                     await _context.SaveChangesAsync();

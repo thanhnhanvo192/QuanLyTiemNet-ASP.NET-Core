@@ -11,6 +11,7 @@ namespace QuanLyTiemNET
         }
         public DbSet<User> Users { get; set; } // Bảng người dùng
         public DbSet<Computer> Computers { get; set; } // Bảng máy tính
-        public DbSet<Usage> Usages { get; set; } // Bảng hóa đơn
+        public DbSet<UsageRecords> UsageRecords { get; set; } // Bảng hóa đơn
+        public DbSet<Transaction> Transactions { get; set; } // Bảng giao dịch
     }
 }

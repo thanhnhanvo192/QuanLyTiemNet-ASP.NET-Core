@@ -3,15 +3,18 @@
 @{
     ViewData["Title"] = "Danh sách máy tính";
 }
+<p>
+    <a asp-action="Create" class="btn btn-primary">Thêm máy mới</a>
+</p>
 
 <h2>@ViewData["Title"]</h2>
-@if (User.IsInRole("Admin"))
-{
-    <p>
-        <a asp-action="Create" class="btn btn-primary">Thêm máy mới</a>
-    </p>
-}
 
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
 <table class="table table-bordered table-striped">
     <thead class="thead-dark">
         <tr>
@@ -22,28 +25,62 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var computer in Model)
+        @{
+            string status = "";
+        }
+        @if (User.IsInRole("Admin"))
         {
-            <tr>
-                <td>@computer.id</td>
-                <td>@computer.Name</td>
-                <td>@computer.Status</td>
-                <td>@computer.HourlyRate</td>
-                @if (User.IsInRole("Admin"))
+            @foreach (var computer in Model)
+            {
+                switch (computer.Status)
                 {
+                    case ComputerStatus.Unknown:
+                        continue;
+                    case ComputerStatus.Maintenance:
+                        status = "Bảo trì";
+                        break;
+                    case ComputerStatus.Available:
+                        status = "Có sẵn";
+                        break;
+                    case ComputerStatus.InUse:
+                        status = "Đang sử dụng";
+                        break;
+                    default:
+                        continue;
+                }
+
+                <tr>
+                    <td>@computer.id</td>
+                    <td>@computer.Name</td>
+                    <td>@status</td>
+                    <td>@computer.HourlyRate</td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@computer.id" class="btn btn-sm btn-warning">Sửa</a>
                         <a asp-action="Detail" asp-route-id="@computer.id" class="btn btn-sm btn-info">Chi tiết</a>
                         <a asp-action="Delete" asp-route-id="@computer.id" class="btn btn-sm btn-danger">Xóa</a>
                     </td>
-                }
-                @if (User.IsInRole("User"))
-                {
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@computer.id" class="btn btn-sm btn-warning">Chọn</a>
-                    </td>
-                }
-            </tr>
+                </tr>
+            }
         }
+        else if (User.IsInRole("User"))
+        {
+            @foreach (var computer in Model)
+            {
+                @if (computer.Status == ComputerStatus.Available)
+                {
+                    <tr>
+                        <td>@computer.id</td>
+                        <td>@computer.Name</td>
+                        <td>Có sẵn</td>
+                        <td>@computer.HourlyRate</td>
+                        <td>
+                            <form asp-action="SelectComputer" asp-route-id="@computer.id" method="post">
+                                <button type="submit" class="btn btn-sm btn-success">Chọn</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+		}
     </tbody>
 </table>
